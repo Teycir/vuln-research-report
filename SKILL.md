@@ -64,16 +64,30 @@ Canonical layout and workflow distilled from the EverOS (`everos-cors-file-exfil
 
 ## Disclosure workflow (order matters)
 
+**CVE speed rule: direct CNA submission does NOT depend on the maintainer; a GHSA does.**
+A GHSA only becomes a CVE when the maintainer publishes the advisory — unresponsive
+maintainers stall it indefinitely, and ghosting costs them nothing while publishing costs
+them reputation. Observed: mem0's GHSA sat in `triage` >1 week with a ghosting vendor while
+supergateway/agentic-radar got CVEs within 24 h via direct VulnCheck submission (no GHSA).
+An open GHSA may even cause a CNA to defer to the advisory path — so file it for vendor
+contact/credit, not for CVE speed.
+
 1. **Vendor first** — check `SECURITY.md` for channel/ack window. Email from ProtonMail, body-only,
    attach evidence zip, record zip sha256. Save `.eml` to `disclosure/sent/` or `advisory/sent/`.
-2. **Follow up** if no ack near their deadline; cite their published policy.
-3. **VulnCheck** — web form. Field answers live in `submission/vulncheck/form-answers.md`.
+   GHSA counts as vendor *contact* when it's their preferred channel — but treat it as
+   vendor-relations, not your CVE path.
+2. **CNA immediately after** — VulnCheck form AND/OR Vulners email; do not wait on vendor or GHSA.
+   Dual-CNA is net-positive: two queues, built-in duplicate checks (declare the dual
+   submission in both bodies so each CNA knows to check the other), worst case a rejected
+   duplicate request.
+3. **Follow up vendor** if no ack near their deadline; cite their published policy.
+4. **VulnCheck** — web form. Field answers live in `submission/vulncheck/form-answers.md`.
    Record case ID immediately in `timeline.md`, `contact-log.md`, `form-answers.md`, README.
-4. **Vulners CNA** — email `cna@vulners.com`, subject
+5. **Vulners CNA** — email `cna@vulners.com`, subject
    `CVE request — <Product>: <title> (<Severity>, CVSS <score>)`, body = details markdown
    (see `templates/repo-skeleton/submission/vulners/email-to-cna.txt`).
-5. **MITRE** — only if vendor/CNAs stall.
-6. **Public repo** — flip public AFTER submissions are sent (evidence links must resolve for CNAs).
+6. **MITRE** — only if vendor/CNAs stall.
+7. **Public repo** — flip public AFTER submissions are sent (evidence links must resolve for CNAs).
    This also starts the public-disclosure clock — note it in timeline.md.
 
 ## Email archival discipline

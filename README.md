@@ -29,11 +29,13 @@ A disclosure repo that looks like it was run by a professional VRP team:
 
 ## Workflow it encodes
 
+**CNA-first, maintainer-independent.** A GHSA only becomes a CVE when the maintainer publishes it — ghosting vendors stall it indefinitely (observed: mem0's GHSA in `triage` >1 week vs. 24 h CVEs via direct VulnCheck on GHSA-free targets). File GHSAs for vendor contact and credit, never as your CVE path.
+
 1. **Vendor first** — honor `SECURITY.md` channel and ack window; attach evidence zip; archive the `.eml`.
-2. **VulnCheck** — web form; log the case ID everywhere it appears.
-3. **Vulners CNA** — `cna@vulners.com`, subject `CVE request — <Product>: <title> (<sev>, CVSS <score>)`.
+2. **CNA immediately** — VulnCheck form + Vulners email in parallel; declare the dual submission so each CNA dedupes against the other. Do not wait on vendor or GHSA.
+3. **Follow up vendor** if no ack near their deadline; cite their published policy.
 4. **MITRE** — only if the others stall.
-5. **Public flip** — after submissions are sent, so evidence links resolve for CNAs.
+5. **Public flip** — after CNA submissions are sent, so evidence links resolve.
 
 Plus the discipline that makes the trail defensible: UTC timestamps everywhere, Message-IDs and sha256 for every sent email, `SHA256SUMS` manifests per directory, CVSS vectors with calculator links and alternate-scenario scores, and a hard line between *tracked findings* (submitted) and *hardening notes* (documented, not submitted).
 
