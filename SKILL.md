@@ -101,8 +101,10 @@ contact/credit, not for CVE speed.
 
 ## GitHub repo hygiene (do before/at public flip)
 
-- `LICENSE` = MIT, `Copyright (c) <year> Teycir`
-- `gh repo edit --description "..." --add-topic ...` — topics used so far:
+- **REQUIRED — every disclosure repo must have all three, verified before public flip:**
+  1. `LICENSE` file at repo root = MIT, `Copyright (c) <year> Teycir`
+  2. README ends with a `## License` section linking `[MIT License](LICENSE)`
+  3. GitHub repo description + topics set: `gh repo edit --description "..." --add-topic ...` — topics used so far:
   `security vulnerability-research cve responsible-disclosure bug-bounty` + per-target tags
   (`everos fastapi ssrf idor cors`, `mem0 broken-access-control cwe-639`, `supergateway websocket csrf dos`)
 - README leads with the vuln table; status column tracks VulnCheck case IDs + "Vulners CNA emailed".
@@ -122,4 +124,4 @@ Do NOT submit them to CNAs — risk of "informational" bounce and it dilutes the
 - [ ] Vendor contacted first; deadline math documented in timeline.md
 - [ ] VulnCheck case IDs logged everywhere they appear
 - [ ] `.eml` archives + Message-IDs in contact-log.md
-- [ ] Repo public, MIT licensed, description + topics set
+- [ ] Repo public, LICENSE (MIT) file + README `## License` section + GitHub description/topics all set
