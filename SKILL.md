@@ -16,7 +16,9 @@ Canonical layout and workflow distilled from the EverOS (`everos-cors-file-exfil
 
 ```
 <target>-<slug>/                  # e.g. everos-cors-file-exfil, mem0-tenant-isolation
-├── README.md                    # public index: findings table, severity/CVSS, status, timeline
+├── README.md                    # public index: findings table, severity/CVSS, status, timeline,
+│                                #   + REQUIRED plain-language sections: "The bug, simply",
+│                                #   "Attack path" (diagram), "Potential harm"
 ├── LICENSE                      # MIT, "Copyright (c) <year> Teycir"
 ├── report.md                    # master report (F-01 style) OR audit-YYYY-MM-DD/report.md for multi-finding audits
 ├── audit-YYYY-MM-DD/            # multi-finding audits: report.md + evidence/ + pocs/ + SHA256SUMS
@@ -108,6 +110,10 @@ contact/credit, not for CVE speed.
   `security vulnerability-research cve responsible-disclosure bug-bounty` + per-target tags
   (`everos fastapi ssrf idor cors`, `mem0 broken-access-control cwe-639`, `supergateway websocket csrf dos`)
 - README leads with the vuln table; status column tracks VulnCheck case IDs + "Vulners CNA emailed".
+- **REQUIRED — every README must include three plain-language sections** (no jargon walls):
+  1. *The bug, simply* — 2-4 sentences a non-specialist understands: what the code does, what it fails to check, why that matters
+  2. *Attack path* — ASCII/diagram of the exploitation chain (input → missing check → impact), plus the realistic trigger (e.g. prompt injection)
+  3. *Potential harm* — concrete impact bullets: what data/code/secrets an attacker gets, who is exposed
 
 ## Hardening notes vs findings
 
