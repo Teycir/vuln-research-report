@@ -16,9 +16,9 @@ Canonical layout and workflow distilled from the EverOS (`everos-cors-file-exfil
 
 ```
 <target>-<slug>/                  # e.g. everos-cors-file-exfil, mem0-tenant-isolation
-├── README.md                    # public index: findings table, severity/CVSS, status, timeline,
-│                                #   + REQUIRED plain-language sections: "The bug, simply",
-│                                #   "Attack path" (diagram), "Potential harm"
+├── README.md                    # public index: summary → Contents → Timeline → findings table
+│                                #   + severity/CVSS/status + REQUIRED plain-language sections:
+│                                #   "The bug, simply", "Attack path" (diagram), "Potential harm"
 ├── LICENSE                      # MIT, "Copyright (c) <year> Teycir"
 ├── report.md                    # master report (F-01 style) OR audit-YYYY-MM-DD/report.md for multi-finding audits
 ├── audit-YYYY-MM-DD/            # multi-finding audits: report.md + evidence/ + pocs/ + SHA256SUMS
@@ -39,6 +39,31 @@ Canonical layout and workflow distilled from the EverOS (`everos-cors-file-exfil
 
 `<TARGET>-YYYY-NN` (e.g. `EVEROS-2026-02`, `MEM0-2026-01`). Never reuse; hardening notes get
 `—` rows in the README table, not IDs.
+
+## README structure (required order)
+
+1. Title + one-paragraph summary + `verified against <target> @ <commit>` line.
+2. `## Contents` — index of every H2, in document order, as GitHub anchor links.
+3. `## Timeline` — UTC ISO-8601 events, oldest first, one proof link per external claim.
+4. `## Vulnerabilities found` — findings table (ID, severity, CVSS, status).
+5. `## The bug, simply` / `## Attack path` / `## Potential harm` — plain-language sections.
+6. `## Report metadata`, `## Disclosure status`, `## Evidence`, `## License`.
+
+**Index rules**
+
+- Place `## Contents` immediately after the summary; place `## Timeline` immediately after the index.
+- Every H2 must appear in the index, in the same order.
+- Anchors must resolve on GitHub: lowercase, spaces → `-`, strip punctuation.
+- No duplicate H2 names (rename, do not rely on `-1` suffixes).
+- Relative links must resolve at the pushed commit.
+
+**Timeline rules**
+
+- Use UTC ISO-8601: `YYYY-MM-DDTHH:MM:SSZ`; date-only only when the time is unknown.
+- One row per externally verifiable event; no vague "recently" or "after disclosure".
+- Every external claim links its artifact: sent `.eml`, contact log, CNA case record, commit, release, CVE.
+- Cover at minimum: audit/PoC verified, vendor notice sent, vendor ticket, CNA filed, fix commit, fixed release, repo public, CVE assigned.
+- Keep `README.md`, `submission/*/timeline.md`, and `disclosure/contact-log.md` consistent; contact-log is authoritative for Message-ID/sha256.
 
 ## report.md / audit report structure
 
